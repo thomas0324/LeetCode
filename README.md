@@ -52,6 +52,7 @@ My Answer
     }
 
 Time Complexity: O(n*sqrt(m))  where n is the number of element in the array, sqrt(m) is the iteration of the Math.sqrt(num) 
+
 [Reference](https://leetcode.com/problems/four-divisors/)
  
  
