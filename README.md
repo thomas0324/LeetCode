@@ -84,3 +84,66 @@ My Answer:
     }
 
 Time Complexity: O(n) where n is the number of element in the array
+
+#### 2020/07/14 
+[Question](https://leetcode.com/problems/binary-tree-level-order-traversal/submissions/): Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+For example:
+
+    Given binary tree [3,9,20,null,null,15,7]
+    
+                                3
+                               / \
+                              9  20
+                                /  \
+                               15   7
+                               
+    Return [[3],[9,20],[15,7]]
+
+My Answer: 
+
+    class Solution {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+
+            if(root == null) {
+                return new ArrayList<List<Integer>>() ;
+            }
+
+            List<Integer> list = new ArrayList<>() ;
+            List<List<Integer>> answer = new ArrayList<List<Integer>>() ;
+            Queue<TreeNode> queue = new LinkedList<TreeNode>() ; 
+
+            TreeNode node = root ; 
+            queue.add(node) ;
+            list.add(node.val) ;
+            answer.add(list) ;
+
+
+            while(queue.size() != 0) {
+                list = new ArrayList<>() ;
+                int size = queue.size() ;
+
+                for(int i = 0 ; i < size ; i++) {
+                    node = queue.remove() ;
+                    if(node.left != null) {
+                        queue.add(node.left) ;
+                        list.add(node.left.val) ;
+                    }
+                    if(node.right != null) {
+                        queue.add(node.right) ;
+                        list.add(node.right.val) ;
+                    }
+                }
+
+                if(list.size() != 0) {
+                    answer.add(list) ;
+                }
+            }
+            return answer ; 
+        }
+    }
+
+Time Complexity: O(n) where n is the number of visited node 
+
+    
+                              
