@@ -14,7 +14,7 @@ Example:
         7 has 2 divisors: 1, 7
         The answer is the sum of divisors of 21 only.
 
-My Answer
+My Answer: Math
 
     class Solution {
         public int sumFourDivisors(int[] nums) {
@@ -88,7 +88,7 @@ Time Complexity: O(n) where n is the number of element in the array
 #### 2020/07/14 
 [Question](https://leetcode.com/problems/binary-tree-level-order-traversal/submissions/): Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
 
-For example:
+Example:
 
     Given binary tree [3,9,20,null,null,15,7]
     
@@ -100,7 +100,7 @@ For example:
                                
     Return [[3],[9,20],[15,7]]
 
-My Answer: 
+My Answer: BFS 
 
     class Solution {
         public List<List<Integer>> levelOrder(TreeNode root) {
@@ -145,5 +145,59 @@ My Answer:
 
 Time Complexity: O(n) where n is the number of visited node 
 
+#### 2020/07/15
+[Question](https://leetcode.com/problems/valid-parentheses/): Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if: Open brackets must be closed by the same type of brackets. Open brackets must be closed in the correct order. Note that an empty string is also considered valid.
     
+Example:
+
+    Input: "()"
+    Output: true
+    
+    Input: "()[]{}"
+    Output: true
+    
+    Input: "([)]"
+    Output: false
+ 
+My Answer: Stack
+
+    class Solution {
+        public boolean isValid(String s) {
+            Stack<Character> stack = new Stack<Character>();
+
+            if(s.length() % 2 != 0) {
+                return false ;
+            }
+
+            for(int i = 0 ; i < s.length() ; i++) {
+                char temp = s.charAt(i) ;
+                switch(temp){
+                    case '(' : case '[': case '{': 
+                        stack.push(temp) ;
+                        break ;
+                    case ')':
+                        if(stack.size() == 0 || stack.peek() != '(') return false ;
+                        else {
+                            stack.pop() ;
+                            break ;
+                        }
+                    case ']':
+                        if(stack.size() == 0 || stack.peek() != '[' ) return false ;
+                        else {
+                            stack.pop() ;
+                            break ;
+                        }
+                    case '}':
+                        if(stack.size() == 0 || stack.peek() != '{' ) return false ;
+                        else {
+                            stack.pop() ;
+                            break ;
+                        }
+                }
+            }
+            return (stack.size() == 0) ? true : false ;    
+        }
+    }
+
+Time Complexity: O(n) where n is the length of the string
                               
