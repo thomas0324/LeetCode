@@ -324,7 +324,9 @@ My Answer:
 
         }
     }
-    
+
+Time Complexity: O(n) where n is the number of node in the tree 
+
 #### 2020/08/17
 [Question](https://leetcode.com/explore/featured/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/3427/): 
 
@@ -381,3 +383,72 @@ My Answer:
             }
         }
     }
+
+Time Complexity: O(m) where m is the number of iterations until candies = 0 
+
+#### 2020/08/20
+[Question](https://leetcode.com/problems/goat-latin/): 
+
+A sentence S is given, composed of words separated by spaces. Each word consists of lowercase and uppercase letters only.
+
+We would like to convert the sentence to "Goat Latin" (a made-up language similar to Pig Latin.)
+
+The rules of Goat Latin are as follows:
+
+If a word begins with a vowel (a, e, i, o, or u), append "ma" to the end of the word.
+For example, the word 'apple' becomes 'applema'.
+ 
+If a word begins with a consonant (i.e. not a vowel), remove the first letter and append it to the end, then add "ma".
+For example, the word "goat" becomes "oatgma".
+ 
+Add one letter 'a' to the end of each word per its word index in the sentence, starting with 1.
+For example, the first word gets "a" added to the end, the second word gets "aa" added to the end and so on.
+
+Return the final sentence representing the conversion from S to Goat Latin. 
+
+Example: 
+
+    Input: "I speak Goat Latin"
+    Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+
+My Answer: 
+
+    class Solution {
+        public String toGoatLatin(String S) {
+            String[] words = S.split("\\W+");
+            String a = "a" ;
+            String answer = "" ;
+
+            for(int i = 0 ; i < words.length ; i++) {
+                System.out.println("Now checking " + words[i]) ;
+                if(isVowel(words[i])) {
+                    words[i] += "ma" ;
+                } else {
+                    char first = words[i].charAt(0) ;
+                    words[i] = words[i].substring(1) ;
+                    words[i] += first ; 
+                    words[i] += "ma" ; 
+                }
+
+                words[i] = words[i] + a ; 
+                a += "a" ;
+
+                if(i != words.length-1) {
+                    words[i] += " " ;
+                }
+                answer += words[i] ;
+            }
+            return answer ;
+        }
+
+        public boolean isVowel(String word) {
+            word = word.toLowerCase() ;
+            char first = word.charAt(0) ;
+            if(first == 'a' || first == 'e' || first == 'i' || first == 'o' || first == 'u') {
+                return true ;
+            } 
+            return false ;
+        }
+    }
+
+Time Complexity: O(n) where n is the number of words in the String
