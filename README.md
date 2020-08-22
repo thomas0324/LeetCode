@@ -453,10 +453,8 @@ My Answer:
 
 Time Complexity: O(n) where n is the number of words in the String
 
-#### 2020/08/20
-[Question](https://leetcode.com/problems/symmetric-tree/submissions/): 
-
-Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+#### 2020/08/21
+[Question](https://leetcode.com/problems/symmetric-tree/submissions/):  Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 
 For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
 
@@ -504,3 +502,82 @@ My Answer:
     }
 
 Time Complexity: O(n) where n is the number of nodes in the tree 
+
+#### 2020/08/22
+[Question](https://leetcode.com/explore/featured/card/top-interview-questions-easy/94/trees/628/): Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+
+            3
+           / \
+          9  20
+            /  \
+           15   7
+
+    It should return: 
+    
+        [
+          [3],
+          [9,20],
+          [15,7]
+        ]
+ 
+ My Answer: 
+ 
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+    class Solution {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> answer = new ArrayList<List<Integer>>();
+            List<Integer> list = new ArrayList<Integer>();  
+
+            if(root == null) {
+                return answer ;
+            }
+
+            list.add(root.val) ;
+            answer.add(list) ;
+
+            // modified BFS 
+            Queue<TreeNode> queue = new LinkedList<>(); 
+            queue.add(root) ;
+            while(queue.size() != 0) {
+                list = new ArrayList<Integer>();  
+                int size = queue.size() ;
+                for(int i = 0 ; i < size ; i++) {
+                    TreeNode node = queue.remove() ;
+                    if(node.left != null) {
+                        queue.add(node.left) ;
+                        list.add(node.left.val) ;
+                    }
+                    if(node.right != null) {
+                        queue.add(node.right) ;
+                        list.add(node.right.val) ;
+                    }
+                }
+                if(queue.size() != 0) {
+                    answer.add(list) ; 
+                }
+            }
+
+            return answer ; 
+        }
+    }
+
+Time Complexity: O(n) where n is the number of nodes in the tree
+
+
