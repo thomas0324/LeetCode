@@ -452,3 +452,55 @@ My Answer:
     }
 
 Time Complexity: O(n) where n is the number of words in the String
+
+#### 2020/08/20
+[Question](https://leetcode.com/problems/symmetric-tree/submissions/): 
+
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+
+            1
+           / \
+          2   2
+         / \ / \
+        3  4 4  3
+    
+    return true 
+
+My Answer:
+
+        /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+    class Solution {
+        public boolean isSymmetric(TreeNode root) {
+            return checkNode(root, root) ; 
+        }
+
+        public boolean checkNode(TreeNode nodeOne, TreeNode nodeTwo) {
+            if(nodeOne == null && nodeTwo == null) {
+                return true ;
+            }
+
+            if(nodeOne == null || nodeTwo == null) {
+                return false ;
+            }
+
+            return (nodeOne.val == nodeTwo.val) && checkNode(nodeOne.left, nodeTwo.right) && checkNode(nodeOne.right, nodeTwo.left) ;
+        }
+    }
+
+Time Complexity: O(n) where n is the number of nodes in the tree 
